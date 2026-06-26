@@ -2,6 +2,13 @@
 
 A high-performance, responsive E-Commerce web application designed for interactive art catalog manipulation, secure multi-tier session cart compilation, and back-office customer data management.
 
+![Language](https://img.shields.io/badge/Language-Python%203.13+-blue?logo=python&logoColor=white)
+![Framework](https://img.shields.io/badge/Framework-Flask%203.0+-black?logo=flask&logoColor=white)
+![Database](https://img.shields.io/badge/Database-SQLite-blueviolet?logo=sqlite&logoColor=white)
+![ORM Layer](https://img.shields.io/badge/ORM-SQLAlchemy%203.1-red?logo=databricks&logoColor=white)
+![Architecture](https://img.shields.io/badge/Pattern-Monolith%20%2F%20RBAC-green)
+![Storage](https://img.shields.io/badge/Persistence-Session%20Cookies-lightgrey)
+
 ---
 
 ## 🌐 Engine Overview
