@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}Home - The Artisan's Touch{% endblock %}
+{% block content %}
+<div style="background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80') center/cover; padding: 100px 40px; text-align: center; color: white; border-radius: 12px; margin-bottom: 40px;">
+    <h1 style="font-size: 3rem; margin: 0;">Preserving Fluid Splendour</h1>
+    <p style="font-size: 1.3rem; margin: 15px 0 30px;">Premium High-Gloss Unbreakable Custom Resin Masterpieces.</p>
+    <a href="{{ url_for('shop_view') }}" target="_self" class="btn btn-accent" style="font-size: 1.1rem; padding: 12px 30px;">Explore Collection</a>
+</div>
+
+<h2>Curated Signature Concepts</h2>
+<div class="card-grid">
+    {% for p in featured %}
+    <div class="card">
+        <img src="{{ p.image_url }}" alt="{{ p.name }}">
+        <div class="card-content">
+            <h3>{{ p.name }}</h3>
+            <p style="color: var(--text-light); font-size: 0.95rem;">{{ p.description[:110] }}...</p>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:15px;">
+                <span style="font-weight:bold; font-size:1.2rem; color:var(--primary-color);">PKR {{ p.price }}</span>
+                <a href="{{ url_for('product_detail_view', id=p.id) }}" target="_self" class="btn">View Details</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

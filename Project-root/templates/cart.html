@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+{% block title %}Cart Evaluation - The Artisan's Touch{% endblock %}
+{% block content %}
+<h2>Your Shopping Frame</h2>
+{% if not cart_items %}
+<div style="background: white; padding: 40px; text-align: center; border-radius: 8px;">
+    <p style="font-size: 1.2rem; color: var(--text-light);">No entries loaded into tracking vectors.</p>
+    <a href="{{ url_for('shop_view') }}" target="_self" class="btn">Return to Collection</a>
+</div>
+{% else %}
+<div style="background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px;">
+    {% for item in cart_items %}
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #edf2f7; padding: 15px 0;">
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <img src="{{ item.product.image_url }}" alt="" style="width: 70px; height: 70px; object-fit: cover; border-radius: 4px;">
+            <div>
+                <h4 style="margin: 0 0 5px;">{{ item.product.name }}</h4>
+                <p style="margin: 0; color: var(--text-light); font-size: 0.9rem;">Unit Financial Load: PKR {{ item.product.price }}</p>
+            </div>
+        </div>
+        <div style="text-align: right;">
+            <div style="font-weight: bold;">Units: {{ item.quantity }}</div>
+            <div style="color: var(--secondary-color); font-weight: bold; margin-top: 5px;">PKR {{ item.subtotal }}</div>
+        </div>
+    </div>
+    {% endfor %}
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #edf2f7;">
+        <a href="{{ url_for('clear_cart_handler') }}" target="_self" class="btn btn-danger">Flush Cart Vector</a>
+        <div style="text-align: right;">
+            <h3 style="margin: 0 0 15px;">Total Aggregate Cost: PKR {{ total_price }}</h3>
+            <a href="{{ url_for('checkout_view') }}" target="_self" class="btn btn-accent" style="padding: 12px 35px; font-size: 1.1rem;">Advance to Verification</a>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}

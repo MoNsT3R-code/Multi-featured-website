@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}{{ product.name }} - Detail{% endblock %}
+{% block content %}
+<div style="display: flex; gap: 40px; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 300px;">
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" style="width: 100%; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    </div>
+    <div style="flex: 1; min-width: 300px; display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+            <span style="color: var(--secondary-color); font-weight: bold; text-transform: uppercase; font-size: 0.9rem;">Classification Matrix: {{ product.category }}</span>
+            <h1 style="margin: 10px 0 20px; color: var(--primary-color);">{{ product.name }}</h1>
+            <p style="font-size: 1.1rem; line-height: 1.6; color: var(--text-dark);">{{ product.description }}</p>
+            
+            <div style="background: #edf2f7; padding: 15px; border-radius: 6px; margin: 25px 0;">
+                <h4 style="margin: 0 0 5px;">Structural Care Specifications:</h4>
+                <ul style="margin: 0; padding-left: 20px; font-size: 0.95rem; color: var(--text-dark);">
+                    <li>Ultra-Clear Anti-Yellowing Polymer Core Fluid.</li>
+                    <li>Impact-Resistant Hardened Unbreakable Compound.</li>
+                    <li>Thermal Resistance thresholds up to 90°C.</li>
+                </ul>
+            </div>
+            
+            <p style="font-size: 1.1rem;">Availability Status: <strong>In Stock ({{ product.stock }} items)</strong></p>
+        </div>
+        <div>
+            <div style="font-size: 2rem; font-weight: bold; color: var(--primary-color); margin-bottom: 20px;">PKR {{ product.price }}</div>
+            <form action="{{ url_for('add_to_cart_handler', id=product.id) }}" method="POST">
+                <button type="submit" class="btn btn-accent" style="padding: 15px 40px; font-size: 1.1rem; font-weight: bold; width: 100%;">Add To Application Cart Matrix 🛒</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

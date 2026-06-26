@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block title %}Login - The Artisan's Touch{% endblock %}
+{% block content %}
+<div style="max-width: 400px; margin: 40px auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h3 style="margin-top: 0; text-align: center; color: var(--primary-color);">Identity Token Authentication</h3>
+    <form action="{{ url_for('login_view') }}" method="POST">
+        <div style="margin-bottom: 15px;">
+            <label style="display:block; margin-bottom:5px; font-weight:bold;">Account Identifier</label>
+            <input type="text" name="username" required style="width:100%; padding:10px; border:1px solid #cbd5e0; border-radius:4px; box-sizing:border-box;">
+        </div>
+        <div style="margin-bottom: 20px;">
+            <label style="display:block; margin-bottom:5px; font-weight:bold;">Security Hash Phrase</label>
+            <input type="password" name="password" required style="width:100%; padding:10px; border:1px solid #cbd5e0; border-radius:4px; box-sizing:border-box;">
+        </div>
+        <button type="submit" class="btn" style="width: 100%; padding: 12px; font-weight: bold;">Initialise Session</button>
+    </form>
+    <p style="text-align:center; margin-top:20px; font-size:0.9rem; color:var(--text-light);">No database trace? <a href="{{ url_for('register_view') }}" target="_self">Build Identity Instance</a></p>
+</div>
+{% endblock %}

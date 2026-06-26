@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}The Artisan's Touch{% endblock %}</title>
+    <style>
+        :root {
+            --primary-color: #1a365d;
+            --secondary-color: #2b6cb0;
+            --accent-color: #d69e2e;
+            --background-base: #f7fafc;
+            --surface-card: #ffffff;
+            --text-dark: #2d3748;
+            --text-light: #718096;
+            --success: #38a169;
+            --danger: #e53e3e;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-base);
+            color: var(--text-dark);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: white;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1200px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .flash-box {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            font-weight: 500;
+        }
+        .flash-success { background: #c6f6d5; color: #22543d; border-left: 5px solid var(--success); }
+        .flash-danger { background: #fed7d7; color: #742a2a; border-left: 5px solid var(--danger); }
+        .flash-warning { background: #feebc8; color: #744210; border-left: 5px solid var(--accent-color); }
+        .flash-info { background: #ebf8ff; color: #2a4365; border-left: 5px solid var(--secondary-color); }
+
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.2s;
+        }
+        .btn:hover { opacity: 0.9; }
+        .btn-accent { background-color: var(--accent-color); color: #000; }
+        .btn-danger { background-color: var(--danger); }
+        
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background-color: var(--surface-card);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-wrapper">
+            <a href="{{ url_for('home_view') }}" target="_self" class="logo">The Artisan's Touch</a>
+            <nav>
+                <a href="{{ url_for('shop_view') }}" target="_self">Collection</a>
+                <a href="{{ url_for('about_view') }}" target="_self">Our Studio</a>
+                <a href="{{ url_for('cart_view') }}" target="_self">Cart ({{ cart_count }})</a>
+                {% if session.get('user_id') %}
+                    {% if session.get('role') == 'Admin' %}
+                        <a href="{{ url_for('admin_dashboard_view') }}" target="_self" style="color:var(--accent-color);">Dashboard</a>
+                    {% else %}
+                        <a href="{{ url_for('orders_view') }}" target="_self">My Orders</a>
+                    {% endif %}
+                    <a href="{{ url_for('logout_handler') }}" target="_self">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('login_view') }}" target="_self">Login</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-box flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 The Artisan's Touch. Curating Dynamic Premium Liquid Resin Artwork. Built under Senior Engineering Specifications.</p>
+    </footer>
+
+</body>
+</html>

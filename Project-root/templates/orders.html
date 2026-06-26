@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+{% block title %}My Orders - The Artisan's Touch{% endblock %}
+{% block content %}
+<h2>Transactional Allocation History</h2>
+{% if not orders %}
+<div style="background: white; padding: 30px; text-align: center; border-radius: 8px;">
+    <p style="color: var(--text-light);">No records linked to your identity token matrix.</p>
+</div>
+{% else %}
+    {% for o in orders %}
+    <div style="background: white; padding: 25px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.02); border-left: 6px solid {% if o.status == 'Pending' %}var(--accent-color){% else %}var(--success){% endif %};">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+            <div>
+                <h3 style="margin: 0 0 5px;">Order Code: ATO-00{{ o.id }}</h3>
+                <p style="margin: 0; font-size: 0.9rem; color: var(--text-light);">Timestamp: {{ o.date_ordered.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                <p style="margin: 5px 0 0; font-size: 0.95rem;"><strong>Destination Address:</strong> {{ o.shipping_address }}</p>
+            </div>
+            <div style="text-align: right;">
+                <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary-color);">PKR {{ o.total_price }}</div>
+                <div style="margin-top: 5px; display: inline-block; padding: 4px 12px; background: #edf2f7; border-radius: 20px; font-size: 0.85rem; font-weight: bold;">Status Flow: {{ o.status }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+{% endblock %}

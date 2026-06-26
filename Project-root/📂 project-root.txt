@@ -1,0 +1,15 @@
+📂 project-root/
+ ├── 📄 web.py
+ ├── 📄 artisans_touch.db
+ ├── 📄 requirements.txt
+ └── 📂 templates/
+      ├── 📄 layout.html
+      ├── 📄 home.html
+      ├── 📄 shop.html
+      ├── 📄 product_detail.html
+      ├── 📄 cart.html
+      ├── 📄 checkout.html
+      ├── 📄 orders.html
+      ├── 📄 about.html
+      ├── 📄 login.html
+      └── 📄 admin_dashboard.html

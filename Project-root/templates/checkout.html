@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block title %}Checkout Authorization - The Artisan's Touch{% endblock %}
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05);">
+    <h2>Delivery Verification Processing</h2>
+    <hr style="margin-bottom: 25px; border: 0; height: 1px; background: #edf2f7;">
+    <form action="{{ url_for('checkout_view') }}" method="POST">
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px;">Shipping Destination Location</label>
+            <textarea name="address" required rows="3" style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e0; box-sizing: border-box; font-family: inherit;" placeholder="Provide complete physical address parameters..."></textarea>
+        </div>
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; font-weight: bold; margin-bottom: 8px;">Contact Number Protocol</label>
+            <input type="text" name="phone" required style="width: 100%; padding: 10px; border-radius: 6px; border: 1px solid #cbd5e0; box-sizing: border-box;" placeholder="e.g. +923001234567">
+        </div>
+        
+        <div style="background: #ebf8ff; padding: 15px; border-radius: 6px; margin-bottom: 25px; border: 1px solid #bee3f8;">
+            <h4 style="margin: 0 0 5px; color: var(--primary-color);">Simulated Gateway Configuration</h4>
+            <p style="margin: 0; font-size: 0.9rem; color: var(--text-dark);">Prototype engine evaluates this order path under a Cash on Delivery processing rule framework.</p>
+        </div>
+        
+        <button type="submit" class="btn btn-accent" style="width: 100%; padding: 12px; font-size: 1.1rem;">Authorize Purchase Order Execution</button>
+    </form>
+</div>
+{% endblock %}
